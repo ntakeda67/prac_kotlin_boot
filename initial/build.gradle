@@ -11,6 +11,10 @@ buildscript {
     }
 }
 
+/*sourceSets {
+    main.kotlin.srcDirs += './initial/src/main/kotlin'
+    test.kotlin.srcDirs += './src/test/main/kotlin'
+}*/
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -42,6 +46,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
     // end::actuator[]
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version" // Required for Kotlin integration
-    testCompile("junit:junit")
+    testCompile 'junit:junit:4.12'
+    testCompile "org.jetbrains.kotlin:kotlin-test"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
 
