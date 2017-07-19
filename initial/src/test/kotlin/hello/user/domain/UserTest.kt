@@ -1,10 +1,11 @@
-package hello.user.domain.attr
+package hello.user.domain
 
 import hello.user.domain.User
+import hello.user.domain.attr.*
 import kotlin.test.assertEquals
 import org.junit.Test
 
-class UserIDTest {
+class UserTest {
     @Test
     fun generateWithoutUserID_givenUndefined(){
         val user = User(FullName(

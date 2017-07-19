@@ -9,4 +9,4 @@ open class UserID(private val id:String) {
     }
 }
 
-object UndefinedUserID: UserID("Undefined");
+object UndefinedUserID: UserID("Undefined")
