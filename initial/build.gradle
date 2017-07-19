@@ -11,10 +11,6 @@ buildscript {
     }
 }
 
-/*sourceSets {
-    main.kotlin.srcDirs += './initial/src/main/kotlin'
-    test.kotlin.srcDirs += './src/test/main/kotlin'
-}*/
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -34,6 +30,12 @@ repositories {
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
 
 dependencies {
     // tag::jetty[]
@@ -46,8 +48,10 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
     // end::actuator[]
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version" // Required for Kotlin integration
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("com.h2database:h2")
+
     testCompile 'junit:junit:4.12'
     testCompile "org.jetbrains.kotlin:kotlin-test"
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
-

@@ -1,6 +1,5 @@
 package hello.user.domain
 
-import hello.user.domain.User
 import hello.user.domain.attr.*
 import kotlin.test.assertEquals
 import org.junit.Test
