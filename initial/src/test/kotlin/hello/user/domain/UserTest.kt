@@ -31,4 +31,22 @@ class UserTest {
                         , lastName = "User"))
         user.assignID(UserID("newID"))
     }
+
+    @Test
+    fun canRenameUser() {
+        val oldName = FullName(
+                firstName = "Test"
+                , lastName = "User")
+        val newName = FullName(
+                firstName = "Renamed"
+                , lastName = "User")
+        val user = User(
+                UserID("firstID")
+                , oldName)
+        assertEquals(oldName, user.getName())
+
+        user.rename(newName)
+
+        assertEquals(newName, user.getName())
+    }
 }

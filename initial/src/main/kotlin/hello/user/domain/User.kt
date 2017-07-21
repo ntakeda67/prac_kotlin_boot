@@ -7,6 +7,8 @@ class User(private var id:UserID, private var name:FullName) {
     constructor(name: FullName): this(UndefinedUserID, name)
 
     fun getUserID() = this.id
+    fun getName() = this.name
+
     fun rename(name:FullName) {
         this.name = name
     }
