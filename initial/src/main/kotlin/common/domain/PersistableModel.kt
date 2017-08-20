@@ -6,7 +6,7 @@ import common.attr.InstanceID
  * Created by nt67 on 8/15/17.
  */
 abstract class PersistableModel {
-    val instanceID = InstanceID()
+    val instanceID: InstanceID = InstanceID()
     get(): InstanceID {
         return field
     }
