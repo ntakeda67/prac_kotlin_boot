@@ -1,8 +1,5 @@
 package hello.activity.domain
 
-import common.date.LocalDateRange
-import common.date.LocalDateTimeRange
-
 /**
  * Created by nt67 on 7/25/17.
  */

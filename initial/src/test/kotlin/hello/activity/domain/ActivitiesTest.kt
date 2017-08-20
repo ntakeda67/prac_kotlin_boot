@@ -15,13 +15,13 @@ class ActivitiesTest {
     fun totalCalorie_valid() {
         val a = Activities()
 
-        val r1 = Running(100
+        val r1 = Running.buildInstance(100
                 , Running.Distance(100)
                 , LocalDateTimeRange(
                 start = LocalDateTime.of(2015, 1, 1, 0, 0, 0)
                 , endInclusive = LocalDateTime.of(2015, 1, 1, 1, 0, 0))
         )
-        val r2 = Running(200
+        val r2 = Running.buildInstance(200
                 , Running.Distance(100)
                 , LocalDateTimeRange(
                 start = LocalDateTime.of(2015, 1, 1, 0, 0, 0)
@@ -44,20 +44,20 @@ class ActivitiesTest {
 
         val targetDate:LocalDate = LocalDate.of(2015, 1, 1)
 
-        val targetDate1 = Running(100
+        val targetDate1 = Running.buildInstance(100
                 , Running.Distance(100)
                 , LocalDateTimeRange(
                 start = LocalDateTime.of(2015, 1, 1, 0, 0, 0)
                 , endInclusive = LocalDateTime.of(2015, 1, 1, 1, 0, 0))
         )
-        val anotherDate1 = Running(200
+        val anotherDate1 = Running.buildInstance(200
                 , Running.Distance(100)
                 , LocalDateTimeRange(
                 start = LocalDateTime.of(2015, 1, 2, 0, 0, 0)
                 , endInclusive = LocalDateTime.of(2015, 1, 2, 1, 0, 0))
         )
 
-        val targetDate2 = Running(300
+        val targetDate2 = Running.buildInstance(300
                 , Running.Distance(100)
                 , LocalDateTimeRange(
                 start = LocalDateTime.of(2015, 1, 1, 0, 0, 0)
@@ -81,25 +81,25 @@ class ActivitiesTest {
                 ,LocalDate.of(2015, 12, 31)
         )
 
-        val inRange1 = Running(100
+        val inRange1 = Running.buildInstance(100
                 , Running.Distance(100)
                 , LocalDateTimeRange(
                 start = LocalDateTime.of(2015, 1, 1, 0, 0, 0)
                 , endInclusive = LocalDateTime.of(2015, 1, 1, 1, 0, 0))
         )
-        val inRange2 = Running(100
+        val inRange2 = Running.buildInstance(100
                 , Running.Distance(100)
                 , LocalDateTimeRange(
                 start = LocalDateTime.of(2015, 12, 31, 23, 59, 59)
                 , endInclusive = LocalDateTime.of(2016, 1, 1, 1, 0, 0))
         )
-        val outRange1 = Running(100
+        val outRange1 = Running.buildInstance(100
                 , Running.Distance(100)
                 , LocalDateTimeRange(
                 start = LocalDateTime.of(2014, 12, 31, 23, 59, 59)
                 , endInclusive = LocalDateTime.of(2015, 1, 1, 1, 0, 0))
         )
-        val outRange2 = Running(100
+        val outRange2 = Running.buildInstance(100
                 , Running.Distance(100)
                 , LocalDateTimeRange(
                 start = LocalDateTime.of(2016, 1, 1, 0, 0, 0)

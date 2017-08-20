@@ -9,7 +9,7 @@ import java.time.LocalDate
 class Activities {
     private val activityList: MutableList<Activity> = ArrayList()
 
-    constructor(){}
+    constructor()
     constructor(activityList: List<Activity>) {
         this.activityList.clear()
         this.activityList.addAll(activityList)

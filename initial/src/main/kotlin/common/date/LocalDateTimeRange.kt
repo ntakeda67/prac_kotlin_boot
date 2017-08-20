@@ -5,8 +5,8 @@ import java.time.LocalDateTime
 /**
  * Local Date per minute Iterator
  */
-data class LocalDateTimeRange(
-        override val start: LocalDateTime
+open class LocalDateTimeRange(
+          override val start: LocalDateTime
         , override val endInclusive:  LocalDateTime) :ClosedRange<LocalDateTime>, Iterable<LocalDateTime> {
     override fun iterator(): Iterator<LocalDateTime> = LocalDateTimeIterator(this)
 }
@@ -23,5 +23,6 @@ class LocalDateTimeIterator(val range :LocalDateTimeRange): Iterator<LocalDateTi
         current.plusMinutes(1L)
         return next
     }
-
 }
+
+object NullLocalDateTimeRange : LocalDateTimeRange(LocalDateTime.of(1900, 1, 1, 0, 0, 0), LocalDateTime.of(1900, 1, 1, 0, 0, 0))
