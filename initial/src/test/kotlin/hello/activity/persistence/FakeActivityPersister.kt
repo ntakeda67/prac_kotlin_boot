@@ -6,8 +6,8 @@ import common.attr.PersistedRecordID
 import common.attr.RecordID
 import common.persistence.Persister
 import hello.activity.domain.Activity
+import org.jetbrains.annotations.TestOnly
 import java.util.*
-import kotlin.collections.HashSet
 
 /**
  * アプリケーションの実行期間の間だけ、インメモリ保存するテスト用永続化層
@@ -48,13 +48,19 @@ object FakeActivityPersister : Persister<Activity> {
 
 
     private fun addToInstanceMap(a: Activity) {
-        instanceMap.putIfAbsent(a.instanceID, a)
+        if(getInstanceByRecordID(a.getActivityID()) != null) {
+            // 既存のものと同じRecordIDのインスタンスが来た
+            // 操作不正
+            throw IllegalStateException("Same RecordID Instance cannot be added. Activity.RecordID: ${a.getActivityID()}")
+        }
+        instanceMap.put(a.instanceID, a)
     }
 
     override fun findByID(id: RecordID): Activity? {
         val instanced = getInstanceByRecordID(id)
         return when (instanced) {
             null -> {
+                // Long値idの一意性ではなく、RecordIDインスタンス一意性でのチェックになっている
                 val p = persistedMap[id]
                 if (p != null) { addToInstanceMap(p) }
                 return p
@@ -68,15 +74,30 @@ object FakeActivityPersister : Persister<Activity> {
     }
 
     override fun persistAll() {
-        var inserting: MutableSet<Activity> = HashSet()
-        var updating : MutableSet<Activity> = HashSet()
         // TODO: partitionが使えそうな気配がする
         instanceMap.map { Pair(it.value.getActivityID(), it.value) }
                 .forEach {
                     when(it.first) {
-                        NotYetPersistedID -> it.second.setActivityID(generateRecordID())
+                        is NotYetPersistedID -> {
+                            it.second.setActivityID(generateRecordID())
+                        }
+
                     }
                     persistedMap.put(it.second.getActivityID(), it.second)
                 }
+    }
+
+    @TestOnly
+    fun clear() {
+        destroyPersistanceMap()
+        persistedMap.clear()
+        currentRecordIDSequence = 0L
+    }
+
+    @TestOnly
+    fun findAllPersisted(): Set<Activity> = persistedMap.values.toSet()
+
+    fun destroyPersistanceMap() {
+        instanceMap.clear()
     }
 }

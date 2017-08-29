@@ -15,7 +15,7 @@ abstract class Activity : PersistableModel() {
             // でも、interfaceもひとつ切るのはやり過ぎかなって
             // ビジネスルールに属するものとは思っている
             // 実装整合に困難がおきる場合は Wrapper をしかける
-            NotYetPersistedID -> this.rid = rid
+            is NotYetPersistedID -> this.rid = rid
             else -> {
                 throw IllegalStateException("Not allowed to reassign RecordID")
             }

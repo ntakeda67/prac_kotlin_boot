@@ -1,5 +1,6 @@
 package hello.activity.domain
 
+import common.attr.PersistedRecordID
 import common.attr.RecordID
 import common.domain.Repository
 import common.persistence.Persister
@@ -10,7 +11,7 @@ import hello.user.domain.User
  */
 class ActivityRepository(private val persister: Persister<Activity>) : Repository<Activity> {
 
-    override fun findByID(id: RecordID): Activity? {
+    override fun findByID(id: PersistedRecordID): Activity? {
         return persister.findByID(id)
     }
 

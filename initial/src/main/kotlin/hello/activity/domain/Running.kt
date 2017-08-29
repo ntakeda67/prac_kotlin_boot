@@ -41,6 +41,9 @@ class Running : Activity {
 
     override fun getDuration(): LocalDateTimeRange = duration
 
+    fun getDistance() = distanceM
+    fun setDistance(d: Distance) { distanceM = d }
+
     open class Distance {
         companion object {
             fun acceptRange(): IntRange = 0 .. 100000
@@ -56,8 +59,20 @@ class Running : Activity {
             }
             this.meter = meter
         }
+        override operator fun equals(other: Any?): Boolean {
+            return when(other) {
+                is Distance -> this.meter == other.meter
+                else -> false
+            }
+        }
+
+        override fun toString(): String = "Distance: ${meter}[m]"
     }
 
     object NullDistance: Distance(0)
+
+    override fun toString(): String {
+        return getActivityID().toString()
+    }
 }
 
